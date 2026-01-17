@@ -288,6 +288,24 @@
             color: var(--text-dim);
         }
 
+        .input-field.error {
+            border-color: var(--danger);
+            box-shadow: 0 0 10px rgba(255, 51, 102, 0.3);
+        }
+
+        .error-message {
+            color: var(--danger);
+            font-size: 0.7rem;
+            margin-top: 5px;
+            display: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
         .agent-select {
             cursor: pointer;
             appearance: none;
@@ -851,22 +869,26 @@
                     
                     <div class="input-group">
                         <label class="input-label">Person Name</label>
-                        <input type="text" class="input-field" id="personName" placeholder="John Doe">
+                        <input type="text" class="input-field" id="personName" placeholder="John Doe" oninput="validateMultichannelFields()">
+                        <div class="error-message" id="personNameError">Person name is required</div>
                     </div>
 
                     <div class="input-group">
                         <label class="input-label">Company Name</label>
-                        <input type="text" class="input-field" id="companyName" placeholder="Tech Corp">
+                        <input type="text" class="input-field" id="companyName" placeholder="Tech Corp" oninput="validateMultichannelFields()">
+                        <div class="error-message" id="companyNameError">Company name is required</div>
                     </div>
 
                     <div class="input-group">
                         <label class="input-label">Company Email</label>
-                        <input type="text" class="input-field" id="companyEmail" placeholder="contact@techcorp.com">
+                        <input type="text" class="input-field" id="companyEmail" placeholder="contact@techcorp.com" oninput="validateMultichannelFields()">
+                        <div class="error-message" id="companyEmailError">Company email is required</div>
                     </div>
 
                     <div class="input-group">
                         <label class="input-label">Phone Number</label>
-                        <input type="text" class="input-field" id="phoneNumber" placeholder="+49 123 456789">
+                        <input type="text" class="input-field" id="phoneNumber" placeholder="+49 123 456789" oninput="validateMultichannelFields()">
+                        <div class="error-message" id="phoneNumberError">Phone number is required</div>
                     </div>
                 </div>
 
@@ -989,6 +1011,8 @@
                 subtitle.textContent = 'Multi-Channel Attack Engine v1.0';
                 document.getElementById('voiceMode').style.display = 'none';
                 document.getElementById('multichannelMode').style.display = 'block';
+                // Validate fields when switching to multichannel mode
+                setTimeout(() => validateMultichannelFields(), 100);
             }
             
             // Reset any active operations
@@ -1003,6 +1027,52 @@
             document.getElementById('agentName').textContent = config.name;
             document.getElementById('agentStatus').textContent = config.status;
             log(`Agent switched to: ${config.name}`, 'info');
+        }
+
+        // Multi-channel attack validation
+        function validateMultichannelFields() {
+            const personName = document.getElementById('personName').value.trim();
+            const companyName = document.getElementById('companyName').value.trim();
+            const companyEmail = document.getElementById('companyEmail').value.trim();
+            const phoneNumber = document.getElementById('phoneNumber').value.trim();
+            
+            const btn = document.getElementById('multichannelLaunchBtn');
+            let isValid = true;
+            
+            // Validate and show errors for each field
+            const fields = [
+                { id: 'personName', value: personName, errorId: 'personNameError' },
+                { id: 'companyName', value: companyName, errorId: 'companyNameError' },
+                { id: 'companyEmail', value: companyEmail, errorId: 'companyEmailError' },
+                { id: 'phoneNumber', value: phoneNumber, errorId: 'phoneNumberError' }
+            ];
+            
+            fields.forEach(field => {
+                const input = document.getElementById(field.id);
+                const errorMsg = document.getElementById(field.errorId);
+                
+                if (!field.value) {
+                    input.classList.add('error');
+                    errorMsg.classList.add('show');
+                    isValid = false;
+                } else {
+                    input.classList.remove('error');
+                    errorMsg.classList.remove('show');
+                }
+            });
+            
+            // Enable/disable button based on validation
+            if (isValid && !operationActive) {
+                btn.disabled = false;
+                btn.style.opacity = '1';
+                btn.style.cursor = 'pointer';
+            } else {
+                btn.disabled = true;
+                btn.style.opacity = '0.5';
+                btn.style.cursor = 'not-allowed';
+            }
+            
+            return isValid;
         }
 
         // Multi-channel attack functionality
@@ -1052,16 +1122,16 @@
         }
 
         async function launchMultichannelAttack() {
-            const personName = document.getElementById('personName').value;
-            const companyName = document.getElementById('companyName').value;
-            const companyEmail = document.getElementById('companyEmail').value;
-            const phoneNumber = document.getElementById('phoneNumber').value;
-
-            // Validation
-            if (!personName || !companyName || !companyEmail || !phoneNumber) {
-                multichannelLog('ERROR: All target fields are required', 'error');
+            // Validate fields before proceeding
+            if (!validateMultichannelFields()) {
+                multichannelLog('ERROR: Please fill in all required fields (Name, Company, Email, Phone)', 'error');
                 return;
             }
+            
+            const personName = document.getElementById('personName').value.trim();
+            const companyName = document.getElementById('companyName').value.trim();
+            const companyEmail = document.getElementById('companyEmail').value.trim();
+            const phoneNumber = document.getElementById('phoneNumber').value.trim();
 
             operationActive = true;
             const btn = document.getElementById('multichannelLaunchBtn');
@@ -1152,12 +1222,14 @@
             const btn = document.getElementById('multichannelLaunchBtn');
             btn.classList.remove('active');
             btn.innerHTML = '🚀 EXECUTE MULTI-CHANNEL ATTACK 🚀';
-            btn.disabled = false;
             
             // Reset connection status
             document.getElementById('connectionDot').classList.remove('danger');
             document.getElementById('connectionDot').classList.add('warning');
             document.getElementById('connectionStatus').textContent = 'Awaiting Target';
+            
+            // Re-validate fields to enable/disable button appropriately
+            validateMultichannelFields();
         }
 
         function getTime() {
@@ -1421,6 +1493,11 @@
         log('Waiting for operator input...');
         multichannelLog('Multi-Channel Attack Engine v1.0 loaded');
         multichannelLog('Waiting for target configuration...');
+        
+        // Initialize multichannel button as disabled
+        if (document.getElementById('multichannelLaunchBtn')) {
+            validateMultichannelFields();
+        }
     </script>
 </body>
 </html>
