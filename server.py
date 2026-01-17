@@ -69,6 +69,11 @@ AGENT_CONFIGS = {
         "name": "Agent 2 - CEO Enhanced",
         "prompt_file": "prompt_2.txt",
         "bot_name": "Hermetica Hack Agent"
+    },
+    "3": {
+        "name": "Agent 3 - IT Security Expert",
+        "prompt_file": "prompt_3.txt",
+        "bot_name": "Hermetica Hack Agent"
     }
 }
 
@@ -151,6 +156,8 @@ async def start_operation(req: OperationRequest):
         
         # Step 2: Start Joinly client with uvx
         agent_config = AGENT_CONFIGS.get(req.agent_id, AGENT_CONFIGS["2"])
+        if not agent_config:
+            agent_config = AGENT_CONFIGS["2"]  # Default fallback
         print(f"🤖 Starting {agent_config['name']}...")
         print(f"   Using prompt: {agent_config['prompt_file']}")
         

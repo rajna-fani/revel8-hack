@@ -98,6 +98,7 @@ uvx joinly-client \
 |-------|-------------|-------------|
 | Agent 1 | prompt_1.txt | Emergency audit, job threats |
 | Agent 2 | prompt_2.txt | Medical emergency, IT admin role, password guessing |
+| Agent 3 | prompt_3.txt | IT security expert, protocol compliance, role switching |
 
 ## Troubleshooting
 
