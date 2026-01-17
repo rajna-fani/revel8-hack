@@ -7,9 +7,15 @@ AI social engineering simulation for Google Meet, Email & SMS Phishing links. De
 ## Demo
 
 - **Videos**:
-  - **Main deliverable**: [`demos/deliverable_hermetica_make_automation_compressed.mp4`](demos/deliverable_hermetica_make_automation_compressed.mp4)
-  - **Agent 1**: [`demos/deliverable agent 1 bot automation.mp4`](demos/deliverable%20agent%201%20bot%20automation.mp4)
-  - **Agent 2**: [`demos/deliverable agent 2 bot automation.mp4`](demos/deliverable%20agent%202%20bot%20automation.mp4)
+  - **Main deliverable**: Uploading deliverable_hermetica_make_automation_compressed.mp4…
+
+
+  - **Agent 1**: Uploading deliverable agent 1 bot automation.mp4…
+
+
+  - **Agent 2**: Uploading deliverable agent 2 bot automation.mp4…
+
+
 
 ## Prerequisites
 
