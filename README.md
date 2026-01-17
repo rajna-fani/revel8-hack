@@ -1,6 +1,15 @@
 # Hermetica Hack
 
-AI social engineering simulation for Google Meet. Deploy CEO agents to test security bot defenses.
+<img src="frontend/favicon.png" alt="Hermetica Hack favicon" width="64" />
+
+AI social engineering simulation for Google Meet, Email & SMS Phishing links. Deploy CEO agents to test security bot defenses.
+
+## Demo
+
+- **Videos**:
+  - **Main deliverable**: [`demos/deliverable_hermetica_make_automation_compressed.mp4`](demos/deliverable_hermetica_make_automation_compressed.mp4)
+  - **Agent 1**: [`demos/deliverable agent 1 bot automation.mp4`](demos/deliverable%20agent%201%20bot%20automation.mp4)
+  - **Agent 2**: [`demos/deliverable agent 2 bot automation.mp4`](demos/deliverable%20agent%202%20bot%20automation.mp4)
 
 ## Prerequisites
 
