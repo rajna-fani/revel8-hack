@@ -4,6 +4,10 @@
 
 AI social engineering simulation for Google Meet, Email & SMS Phishing links. Deploy CEO agents to test security bot defenses.
 
+## Automation workflow (Make.com)
+
+<img src="demos/make_workflow.png" alt="Make.com automation workflow" width="900" />
+
 ## Demo
 
 - **Videos**:
