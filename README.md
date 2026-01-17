@@ -62,7 +62,7 @@ docker run -d --name joinly-server -p 8000:8000 --env-file .env ghcr.io/joinly-a
 ```bash
 uvx joinly-client \
   --env-file .env \
-  --name "CEO Override Agent" \
+  --name "Hermetica Hack Agent" \
   --llm-provider openai \
   --llm-model gpt-4o-mini \
   --prompt-file prompt_2.txt \
