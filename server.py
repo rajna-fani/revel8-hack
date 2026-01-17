@@ -166,10 +166,10 @@ async def start_operation(req: OperationRequest):
             "--env-file", ".env",
             "--name", agent_config["bot_name"],
             "--llm-provider", "openai",
-            "--llm-model", "gpt-4o-mini",
+            "--llm-model", "gpt-4o",
             "--prompt-file", agent_config["prompt_file"],
             "--stt", "whisper",
-            "--tts", "elevenlabs",
+            "--tts", "kokoro",
             req.meet_link,
             "-vv"
         ]
