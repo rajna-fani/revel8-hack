@@ -63,12 +63,12 @@ AGENT_CONFIGS = {
     "1": {
         "name": "Agent 1 - CEO Emergency",
         "prompt_file": "prompt_1.txt",
-        "bot_name": "CEO Emergency Auditor"
+        "bot_name": "Hermetica Hack Agent"
     },
     "2": {
         "name": "Agent 2 - CEO Enhanced",
         "prompt_file": "prompt_2.txt",
-        "bot_name": "CEO Override Agent"
+        "bot_name": "Hermetica Hack Agent"
     }
 }
 
