@@ -13,7 +13,7 @@ from datetime import datetime
 from fastapi import FastAPI, Request, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import HTMLResponse, StreamingResponse
+from fastapi.responses import HTMLResponse, StreamingResponse, FileResponse
 from pydantic import BaseModel
 
 app = FastAPI(
@@ -89,6 +89,18 @@ async def root():
     """Serve the main frontend"""
     with open("frontend/index.html", "r") as f:
         return HTMLResponse(content=f.read())
+
+
+@app.get("/favicon.ico")
+async def favicon_ico():
+    """Serve favicon.ico"""
+    return FileResponse("frontend/favicon.png", media_type="image/png")
+
+
+@app.get("/favicon.png")
+async def favicon_png():
+    """Serve favicon.png"""
+    return FileResponse("frontend/favicon.png", media_type="image/png")
 
 
 @app.get("/health")
